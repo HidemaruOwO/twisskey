@@ -18,7 +18,7 @@ app.on('ready', () => {
       scrollBounce: true
     }
   });
-  dev.webContents.loadURL('https://misskey.dev/');
+  dev.webContents.loadURL('https://twitter.com/');
   win.addBrowserView(dev);
   dev.setBounds({
     width: win.getContentSize()[0] / 2,
