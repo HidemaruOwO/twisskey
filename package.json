@@ -4,11 +4,14 @@
   "description": "Sorakimeさんがいつも使ってるMisskeyインスタンスであるmisskey.devを左に、misskey.04.siを右に表示させるElectron製アプリケーションですよ、はい\"",
   "main": "src/main/main.js",
   "scripts": {
-    "test": "npx electron ."
+    "test": "npx electron .",
+    "build": "npx electron-builder",
+    "build:mac": "npx electron-builder --mac --universal"
   },
   "author": "Sorakime",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^18.2.3"
+    "electron": "^18.2.3",
+    "electron-builder": "^23.3.3"
   }
 }
