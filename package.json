@@ -1,17 +1,58 @@
 {
   "name": "sorakime-misskey",
   "version": "1.0.0",
-  "description": "Sorakimeさんがいつも使ってるMisskeyインスタンスであるmisskey.devを左に、misskey.04.siを右に表示させるElectron製アプリケーションですよ、はい\"",
+  "description": "TwitterとMisskey.04.siを同時に並べるクライアント ",
   "main": "src/main/main.js",
   "scripts": {
     "test": "npx electron .",
     "build": "npx electron-builder",
     "build:mac": "npx electron-builder --mac --universal"
   },
-  "author": "Sorakime",
+  "author": "Hidemaru",
   "license": "ISC",
   "devDependencies": {
     "electron": "^18.2.3",
     "electron-builder": "^23.3.3"
+  },
+  "build": {
+    "appId": "me.v-sli.twisskey",
+    "productName": "Twisskey",
+    "copyright": "Copyright ©2021-2022 monochrome Project.",
+    "files": [
+      "!.git",
+      "!.dist",
+      "src",
+      "package-lock.json",
+      "package.json",
+      "!.DS_Store"
+    ],
+    "win": {
+      "icon": "icon.ico",
+      "target": "nsis",
+      "legalTrademarks": "Copyright 2021-2023 Hidemaru"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icon.ico"
+    },
+    "linux": {
+      "icon": "icon.png",
+      "target": "AppImage"
+    },
+    "appImage": {
+      "category": "Utility",
+      "synopsis": "Twisskey"
+    },
+    "mac": {
+      "identity": null,
+      "icon": "icon.icns",
+      "category": "public.app-category.reference",
+      "target": "dmg"
+    },
+    "dmg": {
+      "backgroundColor": "#efefef",
+      "title": "Twisskey"
+    }
   }
 }
