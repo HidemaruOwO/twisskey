@@ -1,4 +1,4 @@
-const {app, BrowserView, BrowserWindow} = require('electron');
+const {app, BrowserView, BrowserWindow, shell} = require('electron');
 let win, dev, _04si;
 let isMac = process.platform === 'darwin';
 
@@ -7,6 +7,16 @@ function newWin() {
     width: 700,
     height: 700
   });
+  
+    const handleUrlOpen = (e, url)=>{
+    if( url.match(/^http/)){
+      e.preventDefault()
+      shell.openExternal(url)
+    }
+  }
+  
+  win.webContents.on('will-navigate', handleUrlOpen);
+  win.webContents.on('new-window', handleUrlOpen);
 }
 
 app.on('ready', () => {
@@ -18,7 +28,7 @@ app.on('ready', () => {
       scrollBounce: true
     }
   });
-  dev.webContents.loadURL('https://twitter.com/');
+  dev.webContents.loadURL('https://misskey.04.si/');
   win.addBrowserView(dev);
   dev.setBounds({
     width: win.getContentSize()[0] / 2,
@@ -40,7 +50,7 @@ app.on('ready', () => {
       scrollBounce: true
     }
   });
-  _04si.webContents.loadURL('https://misskey.04.si/');
+  _04si.webContents.loadURL('https://twitter.com/');
   win.addBrowserView(_04si);
   _04si.setBounds({
     width: win.getContentSize()[0] / 2,
@@ -65,3 +75,5 @@ app.on('window-all-closed', () => {
   if (!isMac) app.quit();
   win = null;
 });
+
+
