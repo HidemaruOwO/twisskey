@@ -7,16 +7,6 @@ function newWin() {
     width: 700,
     height: 700
   });
-  
-    const handleUrlOpen = (e, url)=>{
-    if( url.match(/^http/)){
-      e.preventDefault()
-      shell.openExternal(url)
-    }
-  }
-  
-  win.webContents.on('will-navigate', handleUrlOpen);
-  win.webContents.on('new-window', handleUrlOpen);
 }
 
 app.on('ready', () => {
@@ -30,6 +20,15 @@ app.on('ready', () => {
   });
   dev.webContents.loadURL('https://misskey.04.si/');
   win.addBrowserView(dev);
+  const handleUrlOpen = (e, url)=>{
+    if( url.match(/^http/)){
+      e.preventDefault()
+      shell.openExternal(url)
+    }
+  }
+  
+  win.webContents.on('will-navigate', handleUrlOpen);
+  win.webContents.on('new-window', handleUrlOpen);
   dev.setBounds({
     width: win.getContentSize()[0] / 2,
     height: win.getContentSize()[1],
