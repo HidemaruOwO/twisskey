@@ -1,5 +1,5 @@
 {
-  "name": "sorakime-misskey",
+  "name": "twisskey",
   "version": "1.0.0",
   "description": "TwitterとMisskey.04.siを同時に並べるクライアント ",
   "main": "src/main/main.js",
@@ -17,7 +17,7 @@
   "build": {
     "appId": "me.v-sli.twisskey",
     "productName": "Twisskey",
-    "copyright": "Copyright ©2021-2022 monochrome Project.",
+    "copyright": "Copyright 2021-2023 Hidemaru",
     "files": [
       "!.git",
       "!.dist",
