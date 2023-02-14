@@ -1,78 +1,65 @@
-const {app, BrowserView, BrowserWindow, shell} = require('electron');
-let win, dev, _04si;
-let isMac = process.platform === 'darwin';
+const { app, BrowserView, BrowserWindow, shell } = require("electron");
+let win, twitter, _04si;
+let isMac = process.platform === "darwin";
 
 function newWin() {
-  win = new BrowserWindow({
-    width: 700,
-    height: 700
-  });
+   win = new BrowserWindow({
+      width: 1080,
+      height: 720,
+   });
 }
 
-app.on('ready', () => {
-  newWin();
+app.on("ready", () => {
+   newWin();
 
-  // misskey.dev
-  dev = new BrowserView({
-    webPreferences: {
-      scrollBounce: true
-    }
-  });
-  dev.webContents.loadURL('https://misskey.04.si/');
-  win.addBrowserView(dev);
-  const handleUrlOpen = (e, url)=>{
-    if( url.match(/^http/)){
-      e.preventDefault()
-      shell.openExternal(url)
-    }
-  }
-  
-  win.webContents.on('will-navigate', handleUrlOpen);
-  win.webContents.on('new-window', handleUrlOpen);
-  dev.setBounds({
-    width: win.getContentSize()[0] / 2,
-    height: win.getContentSize()[1],
-    x: 0,
-    y: 0
-  });
-  dev.setAutoResize({
-    horizontal: true,
-    vertical: true
-  });
-  dev.webContents.on('dom-ready', () => {
-    dev.webContents.setVisualZoomLevelLimits(1, 10);
-  });
+   console.log(win.getContentSize());
+   const height = win.getBounds().height - win.getContentSize()[1];
+   console.log(height);
+   // misskey.twitter
+   twitter = new BrowserView();
+   twitter.webContents.loadURL("https://twitter.com/");
+   win.addBrowserView(twitter);
 
-  // misskey.04.si
-  _04si = new BrowserView({
-    webPreferences: {
-      scrollBounce: true
-    }
-  });
-  _04si.webContents.loadURL('https://twitter.com/');
-  win.addBrowserView(_04si);
-  _04si.setBounds({
-    width: win.getContentSize()[0] / 2,
-    height: win.getContentSize()[1],
-    x: win.getContentSize()[0] / 2,
-    y: 0
-  });
-  _04si.setAutoResize({
-    horizontal: true,
-    vertical: true
-  });
-  _04si.webContents.on('dom-ready', () => {
-    _04si.webContents.setVisualZoomLevelLimits(1, 10);
-  })
+   twitter.setBounds({
+      width: win.getContentSize()[0] / 2,
+      height: 692,
+      x: 0,
+      y: height,
+   });
+   twitter.setAutoResize({
+      width: true,
+      height: true,
+      horizontal: true,
+      vertical: true,
+   });
+
+   // misskey.04.si
+   _04si = new BrowserView({
+      webPreferences: {
+         scrollBounce: true,
+      },
+   });
+   _04si.webContents.loadURL("https://misskey.04.si/");
+   win.addBrowserView(_04si);
+   _04si.setBounds({
+      width: win.getContentSize()[0] / 2,
+      height: 692,
+      x: win.getContentSize()[0] / 2,
+      y: height,
+   });
+   _04si.setAutoResize({
+      width: true,
+      height: true,
+      horizontal: true,
+      vertical: true,
+   });
 });
 
-app.on('activate', () => {
-  if (win === null) newWin();
+app.on("activate", () => {
+   if (win === null) newWin();
 });
 
-app.on('window-all-closed', () => {
-  if (!isMac) app.quit();
-  win = null;
+app.on("window-all-closed", () => {
+   if (!isMac) app.quit();
+   win = null;
 });
-
-

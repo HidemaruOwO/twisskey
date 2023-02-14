@@ -11,8 +11,8 @@
   "author": "Hidemaru",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^18.2.3",
-    "electron-builder": "^23.3.3"
+    "electron": "^23.0.0",
+    "electron-builder": "^23.6.0"
   },
   "build": {
     "appId": "me.v-sli.twisskey",
