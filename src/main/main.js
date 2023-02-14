@@ -22,7 +22,7 @@ app.on("ready", () => {
 
    twitter.setBounds({
       width: win.getContentSize()[0] / 2,
-      height: 692,
+      height: win.getContentSize()[1],
       x: 0,
       y: height,
    });
@@ -43,7 +43,7 @@ app.on("ready", () => {
    win.addBrowserView(_04si);
    _04si.setBounds({
       width: win.getContentSize()[0] / 2,
-      height: 692,
+      height: win.getContentSize()[1],
       x: win.getContentSize()[0] / 2,
       y: height,
    });
